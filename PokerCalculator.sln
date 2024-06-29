@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerCalculator", "PokerCalculator\PokerCalculator.csproj", "{517D498F-ECEE-4ACC-8E23-7F194ED20960}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerCalculator.Tests", "PokerCalculator.Tests\PokerCalculator.Tests.csproj", "{839AE7AA-ADF3-4726-BF6C-FC22F7AFB066}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{517D498F-ECEE-4ACC-8E23-7F194ED20960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{517D498F-ECEE-4ACC-8E23-7F194ED20960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{517D498F-ECEE-4ACC-8E23-7F194ED20960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{517D498F-ECEE-4ACC-8E23-7F194ED20960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{839AE7AA-ADF3-4726-BF6C-FC22F7AFB066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839AE7AA-ADF3-4726-BF6C-FC22F7AFB066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839AE7AA-ADF3-4726-BF6C-FC22F7AFB066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839AE7AA-ADF3-4726-BF6C-FC22F7AFB066}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
