@@ -13,7 +13,7 @@ public class DeckTests
     [Fact]
     public void Deck_Initialization_ShouldHave52Cards()
     {
-        var deck = new Deck();
+        IDeck deck = new Deck();
 
         var count = deck.Count;
 
@@ -23,8 +23,8 @@ public class DeckTests
     [Fact]
     public void Deck_RemoveCard_ShouldRemoveFromDeck()
     {
-        var deck = new Deck();
-        var cardToRemove = new Card(Rank.Ace, Suit.Hearts);
+        IDeck deck = new Deck();
+        ICard cardToRemove = new Card(Rank.Ace, Suit.Hearts);
 
         deck.RemoveCard(cardToRemove);
 
@@ -34,7 +34,7 @@ public class DeckTests
     [Fact]
     public void IEnumerable_GetEnumerator_ReturnsAllCards()
     {
-        var deck = new Deck();
+        IDeck deck = new Deck();
         var expectedCards = deck.ToList();
 
         IEnumerable enumerable = deck;

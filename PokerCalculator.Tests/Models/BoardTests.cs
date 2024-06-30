@@ -14,9 +14,9 @@ public class BoardTests
     [Fact]
     public void Constructor_ShouldInitializeWithGivenCards()
     {
-        var card1 = new Card(Rank.Ace, Suit.Spades);
-        var card2 = new Card(Rank.King, Suit.Hearts);
-        var board = new Board(card1, card2);
+        ICard card1 = new Card(Rank.Ace, Suit.Spades);
+        ICard card2 = new Card(Rank.King, Suit.Hearts);
+        IBoard board = new Board(card1, card2);
 
         Assert.Equal(2, board.Count);
         Assert.Contains(card1, board);
@@ -26,7 +26,7 @@ public class BoardTests
     [Fact]
     public void Parse_ShouldCreateBoardFromString()
     {
-        var board = Board.Parse("AsKh");
+        IBoard board = Board.Parse("AsKh");
 
         Assert.Equal(2, board.Count);
         Assert.Contains(new Card(Rank.Ace, Suit.Spades), board);
@@ -48,8 +48,8 @@ public class BoardTests
     [Fact]
     public void AddCard_ShouldAddCardToBoard()
     {
-        var board = new Board();
-        var card = new Card(Rank.Queen, Suit.Clubs);
+        IBoard board = new Board();
+        ICard card = new Card(Rank.Queen, Suit.Clubs);
         board.AddCard(card);
 
         Assert.Single(board);
@@ -57,21 +57,11 @@ public class BoardTests
     }
 
     [Fact]
-    public void RemoveCard_ShouldRemoveCardFromBoard()
-    {
-        var card = new Card(Rank.Jack, Suit.Diamonds);
-        var board = new Board(card);
-        board.RemoveCard(card);
-
-        Assert.Empty(board);
-    }
-
-    [Fact]
     public void GetEnumerator_ShouldEnumerateOverCards()
     {
-        var card1 = new Card(Rank.Ten, Suit.Spades);
-        var card2 = new Card(Rank.Nine, Suit.Hearts);
-        var board = new Board(card1, card2);
+        ICard card1 = new Card(Rank.Ten, Suit.Spades);
+        ICard card2 = new Card(Rank.Nine, Suit.Hearts);
+        IBoard board = new Board(card1, card2);
 
         var cards = board.ToList();
 
@@ -83,7 +73,7 @@ public class BoardTests
     [Fact]
     public void IEnumerable_GetEnumerator_ReturnsAllCards()
     {
-        var board = new Board();
+        IBoard board = new Board();
         var expectedCards = board.ToList();
 
         IEnumerable enumerable = board;

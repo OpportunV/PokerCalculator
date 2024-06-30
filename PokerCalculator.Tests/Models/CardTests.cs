@@ -1,5 +1,6 @@
 ﻿using System;
 using PokerCalculator.Enums;
+using PokerCalculator.Interfaces;
 using PokerCalculator.Models;
 
 
@@ -13,7 +14,7 @@ public class CardTests
     [InlineData("Js", Suit.Spades, Rank.Jack)]
     public void Parse_ShouldParseValidCardStrings(string cardString, Suit expectedSuit, Rank expectedRank)
     {
-        var card = Card.Parse(cardString);
+        ICard card = Card.Parse(cardString);
         Assert.Equal(expectedSuit, card.Suit);
         Assert.Equal(expectedRank, card.Rank);
     }
@@ -33,7 +34,7 @@ public class CardTests
     [InlineData(Suit.Spades, Rank.Jack, "Js")]
     public void ToString_ShouldReturnCorrectStringRepresentation(Suit suit, Rank rank, string expectedString)
     {
-        var card = new Card(rank, suit);
+        ICard card = new Card(rank, suit);
         Assert.Equal(expectedString, card.ToString());
     }
 }

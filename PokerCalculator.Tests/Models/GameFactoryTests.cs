@@ -13,8 +13,8 @@ public class GameFactoryTests
     [Fact]
     public void GameFactory_CreateGame_ReturnsHoldemGameForTexasHoldem()
     {
-        var factory = new GameFactory();
-        var board = new Board();
+        IGameFactory factory = new GameFactory();
+        IBoard board = new Board();
         var hands = new List<IHand>
         {
             new Hand(new Card(Rank.Ace, Suit.Hearts), new Card(Rank.Ace, Suit.Diamonds))
@@ -30,8 +30,8 @@ public class GameFactoryTests
     [Fact]
     public void GameFactory_CreateGame_ThrowsExceptionOnUnsupportedType()
     {
-        var factory = new GameFactory();
-        var board = new Board();
+        IGameFactory factory = new GameFactory();
+        IBoard board = new Board();
         var hands = new List<IHand>
         {
             new Hand(new Card(Rank.Ace, Suit.Hearts), new Card(Rank.Ace, Suit.Diamonds))

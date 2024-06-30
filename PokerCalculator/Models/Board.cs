@@ -43,11 +43,6 @@ public class Board : IBoard
         _cards.Add(card);
     }
 
-    public void RemoveCard(ICard card)
-    {
-        _cards.Remove(card);
-    }
-
     public IEnumerator<ICard> GetEnumerator()
     {
         return _cards.GetEnumerator();
