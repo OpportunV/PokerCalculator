@@ -14,10 +14,10 @@ public class HandTests
     [Fact]
     public void Hand_ConstructorWithParams_ShouldInitializeWithCards()
     {
-        var card1 = new Card(Rank.Ace, Suit.Hearts);
-        var card2 = new Card(Rank.King, Suit.Diamonds);
+        ICard card1 = new Card(Rank.Ace, Suit.Hearts);
+        ICard card2 = new Card(Rank.King, Suit.Diamonds);
 
-        var hand = new Hand(card1, card2);
+        IHand hand = new Hand(card1, card2);
 
         Assert.Equal(2, hand.Count());
         Assert.Contains(card1, hand);
@@ -39,7 +39,7 @@ public class HandTests
     [Fact]
     public void IEnumerable_GetEnumerator_ReturnsAllCards()
     {
-        var board = new Hand(new Card(Rank.Ace, Suit.Diamonds));
+        IHand board = new Hand(new Card(Rank.Ace, Suit.Diamonds));
         var expectedCards = board.ToList();
 
         IEnumerable enumerable = board;

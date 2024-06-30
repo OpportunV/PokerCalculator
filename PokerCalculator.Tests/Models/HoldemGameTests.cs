@@ -11,7 +11,7 @@ public class HoldemGameTests
     [Fact]
     public void HoldemGame_InitializationValidation_ThrowsOnDuplicate()
     {
-        var board = Board.Parse("AdKdQd");
+        IBoard board = Board.Parse("AdKdQd");
         var playerHands = new List<IHand>
         {
             Hand.Parse("JdKd")
@@ -23,7 +23,7 @@ public class HoldemGameTests
     [Fact]
     public void HoldemGame_InitializationValidation_ThrowsOnWrongHandsSize()
     {
-        var board = Board.Parse("AdKdQd");
+        IBoard board = Board.Parse("AdKdQd");
         var playerHands = new List<IHand>
         {
             Hand.Parse("Jd")
@@ -35,19 +35,19 @@ public class HoldemGameTests
     [Fact]
     public void HoldemGame_InitializationValidation_NoExceptionOnValidInput()
     {
-        var board = Board.Parse("AdKdQd");
+        IBoard board = Board.Parse("AdKdQd");
         var playerHands = new List<IHand>
         {
             Hand.Parse("JdQc")
         };
 
-        var game = new HoldemGame(board, playerHands);
+        IGame game = new HoldemGame(board, playerHands);
     }
 
     [Fact]
     public void HoldemGame_FilterDeck_RemovesPlayerHandCardsFromDeck()
     {
-        var board = new Board();
+        IBoard board = new Board();
         var playerHands = new List<IHand>
         {
             Hand.Parse("JdQc")
@@ -60,12 +60,12 @@ public class HoldemGameTests
     [Fact]
     public void HoldemGame_FilterDeck_RemovesBoardCardsFromDeck()
     {
-        var board = Board.Parse("AdKdQd");
+        IBoard board = Board.Parse("AdKdQd");
         var playerHands = new List<IHand>
         {
             Hand.Parse("JdQc")
         };
-        var game = new HoldemGame(board, playerHands);
+        IGame game = new HoldemGame(board, playerHands);
 
         Assert.Equal(47, game.Deck.Count);
     }

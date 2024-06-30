@@ -19,19 +19,6 @@ public class Deck : IDeck
         InitializeDefaultDeck();
     }
 
-    public void InitializeDefaultDeck()
-    {
-        _cards.Clear();
-
-        foreach (Suit suit in Enum.GetValues(typeof(Suit)))
-        {
-            foreach (Rank rank in Enum.GetValues(typeof(Rank)))
-            {
-                _cards.Add(new Card(rank, suit));
-            }
-        }
-    }
-
     public void RemoveCard(ICard card)
     {
         _cards.Remove(card);
@@ -45,5 +32,18 @@ public class Deck : IDeck
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+
+    private void InitializeDefaultDeck()
+    {
+        _cards.Clear();
+
+        foreach (Suit suit in Enum.GetValues(typeof(Suit)))
+        {
+            foreach (Rank rank in Enum.GetValues(typeof(Rank)))
+            {
+                _cards.Add(new Card(rank, suit));
+            }
+        }
     }
 }
