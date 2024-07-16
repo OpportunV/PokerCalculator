@@ -11,16 +11,16 @@ public class PokerCombination : IPokerCombination
 {
     public CombinationType Type { get; }
 
-    public IList<ICard> MainCards { get; }
+    private readonly IList<ICard> _mainCards;
 
-    public IList<ICard> Kickers { get; }
+    private readonly IList<ICard> _kickers;
 
     public PokerCombination(CombinationType type, IEnumerable<ICard> combinationCards, IEnumerable<ICard> kickers)
     {
         Type = type;
-        MainCards = combinationCards.OrderByDescending(card => card.Rank)
+        _mainCards = combinationCards.OrderByDescending(card => card.Rank)
             .ToList();
-        Kickers = kickers.OrderByDescending(card => card.Rank)
+        _kickers = kickers.OrderByDescending(card => card.Rank)
             .ToList();
     }
 
@@ -32,13 +32,7 @@ public class PokerCombination : IPokerCombination
         }
 
         var typeComparison = CompareCombinationType(other);
-        if (typeComparison != 0)
-        {
-            return typeComparison;
-        }
-
-        var combinationComparison = CompareCombinationCards(other);
-        return combinationComparison != 0 ? combinationComparison : CompareKickers(other);
+        return typeComparison != 0 ? typeComparison : CompareCards(other);
     }
 
     public override bool Equals(object? obj)
@@ -54,8 +48,7 @@ public class PokerCombination : IPokerCombination
     public override int GetHashCode()
     {
         var hashCode = (int) Type;
-        hashCode = MainCards.Aggregate(hashCode, (current, card) => (current * 397) ^ card.GetHashCode());
-        return Kickers.Aggregate(hashCode, (current, card) => (current * 397) ^ card.GetHashCode());
+        return this.Aggregate(hashCode, (current, card) => (current * 397) ^ card.GetHashCode());
     }
 
     public static bool operator >(PokerCombination left, PokerCombination right)
@@ -90,12 +83,12 @@ public class PokerCombination : IPokerCombination
 
     public IEnumerator<ICard> GetEnumerator()
     {
-        foreach (var card in MainCards)
+        foreach (var card in _mainCards)
         {
             yield return card;
         }
 
-        foreach (var card in Kickers)
+        foreach (var card in _kickers)
         {
             yield return card;
         }
@@ -111,15 +104,17 @@ public class PokerCombination : IPokerCombination
         return Type.CompareTo(other.Type);
     }
 
-    private int CompareCombinationCards(IPokerCombination other)
+    private int CompareCards(IPokerCombination other)
     {
-        return MainCards.Select((t, i) => t.Rank.CompareTo(other.MainCards[i].Rank))
-            .FirstOrDefault(comparison => comparison != 0);
-    }
+        foreach (var (first, second) in this.Zip(other))
+        {
+            var comparison = first.Rank.CompareTo(second.Rank);
+            if (comparison != 0)
+            {
+                return comparison;
+            }
+        }
 
-    private int CompareKickers(IPokerCombination other)
-    {
-        return Kickers.Select((t, i) => t.Rank.CompareTo(other.Kickers[i].Rank))
-            .FirstOrDefault(comparison => comparison != 0);
+        return 0;
     }
 }
