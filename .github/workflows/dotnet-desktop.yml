@@ -23,11 +23,12 @@ jobs:
       run: |
         dotnet restore
         dotnet build -c Release
-        dotnet test -c Release --logger "junit;LogFilePath=../reports/tests.xml"
+        dotnet test -c Release --logger "junit;LogFilePath=../reports/test-results.xml"
 
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        path: reports/tests.xml
+        name: test-results
+        path: reports/*.xml
         reporter: java-junit
