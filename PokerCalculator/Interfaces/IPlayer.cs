@@ -10,4 +10,6 @@ public interface IPlayer
     public IList<ICard> Outs { get; }
 
     public decimal Equity { get; set; }
+    
+    public IPokerCombination? Combination { get; set; }
 }

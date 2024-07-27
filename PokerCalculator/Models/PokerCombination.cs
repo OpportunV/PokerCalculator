@@ -19,8 +19,10 @@ public class PokerCombination : IPokerCombination
     {
         Type = type;
         _mainCards = combinationCards.OrderByDescending(card => card.Rank)
+            .ThenBy(card => card.Suit)
             .ToList();
         _kickers = kickers.OrderByDescending(card => card.Rank)
+            .ThenBy(card => card.Suit)
             .ToList();
     }
 

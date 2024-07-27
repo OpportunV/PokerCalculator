@@ -69,7 +69,7 @@ public class HoldemGame : IGame
 
     private void FilterDeckByHands()
     {
-        foreach (var card in Players.SelectMany(player => player.Hand))
+        foreach (var card in PlayerCards)
         {
             Deck.RemoveCard(card);
         }

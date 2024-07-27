@@ -29,4 +29,11 @@ public class PlayerTests
         IPlayer player = new Player(new Hand());
         Assert.Equal(-1, player.Equity);
     }
+    
+    [Fact]
+    public void Player_InitializesCombination()
+    {
+        IPlayer player = new Player(new Hand());
+        Assert.Null(player.Combination);
+    }
 }

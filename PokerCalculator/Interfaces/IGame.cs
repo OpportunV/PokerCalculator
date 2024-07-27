@@ -10,6 +10,4 @@ public interface IGame
     public IList<IPlayer> Players { get; }
 
     public IDeck Deck { get; }
-
-    public IEnumerable<ICard> PlayerCards { get; }
 }
