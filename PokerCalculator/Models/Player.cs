@@ -12,6 +12,8 @@ public class Player : IPlayer
 
     public decimal Equity { get; set; }
 
+    public IPokerCombination? Combination { get; set; }
+
     public Player(IHand hand)
     {
         Hand = hand;
