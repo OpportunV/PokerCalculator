@@ -20,7 +20,7 @@ public class HoldemOutsCalculator : IOutsCalculator
         _combinationsEvaluator = factory.GetCombinationsEvaluator(PokerGameType.TexasHoldem);
     }
     
-    public void Calculate(IGame game)
+    public void Calculate()
     {
     }
 
