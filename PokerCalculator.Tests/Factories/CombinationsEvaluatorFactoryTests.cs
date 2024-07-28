@@ -10,7 +10,7 @@ namespace PokerCalculator.Tests.Factories;
 public class CombinationsEvaluatorFactoryTests
 {
     [Fact]
-    public void GameFactory_CreateGame_ReturnsHoldemGameForTexasHoldem()
+    public void CombinationsEvaluatorFactory_GetCombinationsEvaluator_ReturnsHoldemCombinationsEvaluatorForTexasHoldem()
     {
         ICombinationsEvaluatorFactory factory = new CombinationsEvaluatorFactory();
 
@@ -20,7 +20,7 @@ public class CombinationsEvaluatorFactoryTests
     }
 
     [Fact]
-    public void GameFactory_CreateGame_ThrowsExceptionOnUnsupportedType()
+    public void CombinationsEvaluatorFactory_GetCombinationsEvaluator_ThrowsExceptionOnUnsupportedType()
     {
         ICombinationsEvaluatorFactory factory = new CombinationsEvaluatorFactory();
 

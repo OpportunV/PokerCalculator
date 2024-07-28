@@ -8,11 +8,11 @@ namespace PokerCalculator.Factories;
 
 public class OutsCalculatorFactory : IOutsCalculatorFactory
 {
-    public IOutsCalculator GetOutsCalculator(PokerGameType gameType)
+    public IOutsCalculator GetOutsCalculator(PokerGameType gameType, IGame game)
     {
         return gameType switch
         {
-            PokerGameType.TexasHoldem => new HoldemOutsCalculator(),
+            PokerGameType.TexasHoldem => new HoldemOutsCalculator(game),
             _ => throw new NotSupportedException($"Unsupported game type: {gameType}")
         };
     }
