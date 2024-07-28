@@ -1,6 +1,6 @@
 ﻿using System;
-using PokerCalculator.Enums;
 using PokerCalculator.Interfaces;
+using PokerCalculator.Models;
 using PokerCalculator.Services;
 
 
@@ -8,12 +8,12 @@ namespace PokerCalculator.Factories;
 
 public class OutsCalculatorFactory : IOutsCalculatorFactory
 {
-    public IOutsCalculator GetOutsCalculator(PokerGameType gameType, IGame game)
+    public IOutsCalculator GetOutsCalculator(IGame game)
     {
-        return gameType switch
+        return game switch
         {
-            PokerGameType.TexasHoldem => new HoldemOutsCalculator(game),
-            _ => throw new NotSupportedException($"Unsupported game type: {gameType}")
+            HoldemGame => new HoldemOutsCalculator(game),
+            _ => throw new NotSupportedException($"Unsupported game type: {game.GetType()}")
         };
     }
 }

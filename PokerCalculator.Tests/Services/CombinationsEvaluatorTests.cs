@@ -10,7 +10,7 @@ namespace PokerCalculator.Tests.Services;
 
 public class CombinationsEvaluatorTests
 {
-    private readonly ICombinationsEvaluator _outsCalculator = new HoldemCombinationsEvaluator();
+    private readonly ICombinationsEvaluator _combinationsEvaluator = new HoldemCombinationsEvaluator();
 
     [Fact]
     public void FillsCombinationProperty_ForThreePlayers()
@@ -26,7 +26,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.NotNull(players[1].Combination);
@@ -45,7 +45,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
     }
@@ -60,7 +60,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
     }
@@ -87,7 +87,7 @@ public class CombinationsEvaluatorTests
 
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.Equal(CombinationType.HighCard, players[0].Combination!.Type);
@@ -115,7 +115,7 @@ public class CombinationsEvaluatorTests
         
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.Equal(CombinationType.Pair, players[0].Combination!.Type);
@@ -143,7 +143,7 @@ public class CombinationsEvaluatorTests
         
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.Equal(CombinationType.TwoPairs, players[0].Combination!.Type);
@@ -162,7 +162,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.NotNull(players[1].Combination);
@@ -182,7 +182,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.NotNull(players[1].Combination);
@@ -202,7 +202,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.NotNull(players[1].Combination);
@@ -222,7 +222,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.NotNull(players[1].Combination);
@@ -242,7 +242,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.NotNull(players[1].Combination);
@@ -262,7 +262,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.NotNull(players[1].Combination);
@@ -282,7 +282,7 @@ public class CombinationsEvaluatorTests
         };
         var game = new HoldemGame(board, players);
 
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         Assert.NotNull(players[0].Combination);
         Assert.NotNull(players[1].Combination);
@@ -310,7 +310,7 @@ public class CombinationsEvaluatorTests
 
         var game = new HoldemGame(board, players);
         
-        _outsCalculator.Evaluate(game);
+        _combinationsEvaluator.Evaluate(game);
 
         var results = game.Players.OrderByDescending(player => player.Combination)
             .Select(player => player.Hand);

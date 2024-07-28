@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using PokerCalculator.Enums;
 using PokerCalculator.Factories;
 using PokerCalculator.Interfaces;
+using PokerCalculator.Models;
 using PokerCalculator.Services;
 
 
@@ -16,9 +16,8 @@ public class OutsCalculatorFactoryTests
     {
         IOutsCalculatorFactory factory = new OutsCalculatorFactory();
 
-        var gameMock = new Mock<IGame>();
-
-        var evaluator = factory.GetOutsCalculator(PokerGameType.TexasHoldem, gameMock.Object);
+        var holdemGame = new HoldemGame(new Board(), new List<IHand>{ Hand.Parse("AsJs") });
+        var evaluator = factory.GetOutsCalculator(holdemGame);
 
         Assert.IsType<HoldemOutsCalculator>(evaluator);
     }
@@ -29,10 +28,7 @@ public class OutsCalculatorFactoryTests
         IOutsCalculatorFactory factory = new OutsCalculatorFactory();
 
         var gameMock = new Mock<IGame>();
-        var playerMock = new Mock<IPlayer>();
-        gameMock.Setup(game => game.Players)
-            .Returns(() => new List<IPlayer> { playerMock.Object });
 
-        Assert.Throws<NotSupportedException>(() => factory.GetOutsCalculator((PokerGameType) 90, gameMock.Object));
+        Assert.Throws<NotSupportedException>(() => factory.GetOutsCalculator(gameMock.Object));
     }
 }
