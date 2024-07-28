@@ -10,7 +10,7 @@ namespace PokerCalculator.Tests.Services;
 
 public class CombinationsEvaluatorTests
 {
-    private readonly ICombinationsEvaluator _outsCalculator = new CombinationsEvaluator();
+    private readonly ICombinationsEvaluator _outsCalculator = new HoldemCombinationsEvaluator();
 
     [Fact]
     public void FillsCombinationProperty_ForThreePlayers()

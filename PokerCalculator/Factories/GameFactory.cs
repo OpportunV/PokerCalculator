@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using PokerCalculator.Enums;
 using PokerCalculator.Interfaces;
+using PokerCalculator.Models;
 
 
-namespace PokerCalculator.Models;
+namespace PokerCalculator.Factories;
 
 public class GameFactory : IGameFactory
 {

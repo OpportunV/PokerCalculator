@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using PokerCalculator.Enums;
+using PokerCalculator.Factories;
 using PokerCalculator.Interfaces;
 using PokerCalculator.Models;
 
 
-namespace PokerCalculator.Tests.Models;
+namespace PokerCalculator.Tests.Factories;
 
 public class GameFactoryTests
 {
