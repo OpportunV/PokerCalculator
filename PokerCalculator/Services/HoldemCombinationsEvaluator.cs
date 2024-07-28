@@ -7,7 +7,7 @@ using PokerCalculator.Models;
 
 namespace PokerCalculator.Services;
 
-public class CombinationsEvaluator : ICombinationsEvaluator
+public class HoldemCombinationsEvaluator : ICombinationsEvaluator
 {
     private static readonly HashSet<Rank> _lowerStraightRanks = new()
     {
