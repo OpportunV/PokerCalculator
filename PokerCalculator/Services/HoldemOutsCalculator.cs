@@ -28,7 +28,7 @@ public class HoldemOutsCalculator : IOutsCalculator
             throw new OutsCalculatorException("Non turn scenarios are not supported yet.");
         }
 
-        ValidateGame();
+        EvaluateGame();
         var favoritePlayer = GetFavoritePlayer();
         SimulateTurn(favoritePlayer);
     }
@@ -67,11 +67,7 @@ public class HoldemOutsCalculator : IOutsCalculator
 
     private IPlayer GetFavoritePlayer()
     {
-        var favoritePlayer = _game.Players.MaxBy(player => player.Combination);
-        if (favoritePlayer == null)
-        {
-            throw new OutsCalculatorException("Cannot get current favorite player");
-        }
+        var favoritePlayer = _game.Players.MaxBy(player => player.Combination)!;
 
         if (_game.Players.Count(player => Equals(player.Combination, favoritePlayer.Combination)) > 1)
         {
@@ -81,7 +77,7 @@ public class HoldemOutsCalculator : IOutsCalculator
         return favoritePlayer;
     }
 
-    private void ValidateGame()
+    private void EvaluateGame()
     {
         if (_game.Players.Any(player => player.Combination == null))
         {

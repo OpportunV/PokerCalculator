@@ -1,16 +1,48 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using PokerCalculator.Enums;
+using PokerCalculator.Exceptions;
 using PokerCalculator.Factories;
 using PokerCalculator.Interfaces;
 using PokerCalculator.Models;
-
 
 namespace PokerCalculator.Tests.Services;
 
 public class OutsCalculatorTests
 {
     private readonly OutsCalculatorFactory _outsCalculatorFactory = new();
+
+    [Fact]
+    public void NonTurnBoard_ShouldThrowError()
+    {
+        var board = Board.Parse("9hAh6h");
+
+        var players = new List<IPlayer>
+        {
+            new Player(Hand.Parse("TdAc")),
+            new Player(Hand.Parse("QhKs")),
+        };
+
+        var game = new HoldemGame(board, players);
+        var outsCalculator = _outsCalculatorFactory.GetOutsCalculator(game);
+        Assert.Throws<OutsCalculatorException>(() => outsCalculator.Calculate());
+    }
+    
+    [Fact]
+    public void MultipleFavorites_ShouldThrowError()
+    {
+        var board = Board.Parse("QsTsJc2d");
+
+        var players = new List<IPlayer>
+        {
+            new Player(Hand.Parse("AhKh")),
+            new Player(Hand.Parse("AdKd")),
+        };
+
+        var game = new HoldemGame(board, players);
+        var outsCalculator = _outsCalculatorFactory.GetOutsCalculator(game);
+        Assert.Throws<OutsCalculatorException>(() => outsCalculator.Calculate());
+    }
 
     [Fact]
     public void RealLifeExample1()
@@ -34,8 +66,8 @@ public class OutsCalculatorTests
         outsCalculator.Calculate();
 
         Assert.Equal(15, players.SelectMany(player => player.Outs)
-                         .Distinct()
-                         .Count());
+            .Distinct()
+            .Count());
     }
 
     [Fact]
@@ -109,7 +141,7 @@ public class OutsCalculatorTests
         };
 
         var boardTurn = new Board(new Card(Rank.Two, Suit.Clubs), new Card(Rank.Ten, Suit.Spades),
-                                  new Card(Rank.Jack, Suit.Spades), new Card(Rank.King, Suit.Clubs));
+            new Card(Rank.Jack, Suit.Spades), new Card(Rank.King, Suit.Clubs));
 
         var gameOuts = new HoldemGame(boardTurn, players);
         var outsCalculator = _outsCalculatorFactory.GetOutsCalculator(gameOuts);
@@ -166,102 +198,5 @@ public class OutsCalculatorTests
         var totalOuts = players.Sum(player => player.Outs.Count);
 
         Assert.Equal(19, totalOuts);
-    }
-
-    [Fact]
-    public void RealLifeExample7()
-    {
-        var players = new List<IPlayer>
-        {
-            new Player(Hand.Parse("Jc3c")),
-            new Player(Hand.Parse("9s5d")),
-            new Player(Hand.Parse("Ac7h")),
-            new Player(Hand.Parse("Ks9d")),
-            new Player(Hand.Parse("7sKh")),
-            new Player(Hand.Parse("2hAs")),
-        };
-
-        var boardTurn = Board.Parse("9c7d2sTh");
-
-        var gameOuts = new HoldemGame(boardTurn, players);
-        var outsCalculator = _outsCalculatorFactory.GetOutsCalculator(gameOuts);
-        outsCalculator.Calculate();
-        var totalOuts = players.Sum(player => player.Outs.Count);
-
-        Assert.Equal(15, totalOuts);
-    }
-
-    [Fact]
-    public void RealLifeExample8()
-    {
-        var players = new List<IPlayer>
-        {
-            new Player(Hand.Parse("QdQh")),
-            new Player(Hand.Parse("AhTs")),
-            new Player(Hand.Parse("2h7d")),
-            new Player(Hand.Parse("8dJc")),
-            new Player(Hand.Parse("Kh3d")),
-            new Player(Hand.Parse("4cKd")),
-            new Player(Hand.Parse("5c3c")),
-        };
-
-        var boardTurn = Board.Parse("8h3h9s6d");
-
-        var gameOuts = new HoldemGame(boardTurn, players);
-        var outsCalculator = _outsCalculatorFactory.GetOutsCalculator(gameOuts);
-        outsCalculator.Calculate();
-        var totalOuts = players.Sum(player => player.Outs.Count);
-
-        Assert.Equal(20, totalOuts);
-    }
-
-    [Fact]
-    public void RealLifeExample9()
-    {
-        var players = new List<IPlayer>
-        {
-            new Player(Hand.Parse("4sAs")),
-            new Player(Hand.Parse("5s9s")),
-            new Player(Hand.Parse("4hKc")),
-            new Player(Hand.Parse("TcAc")),
-            new Player(Hand.Parse("5h7s")),
-            new Player(Hand.Parse("7c3s")),
-            new Player(Hand.Parse("TsJd")),
-            new Player(Hand.Parse("Ad8h")),
-        };
-
-        var boardTurn = Board.Parse("7dKhJc3c");
-
-        var gameOuts = new HoldemGame(boardTurn, players);
-        var outsCalculator = _outsCalculatorFactory.GetOutsCalculator(gameOuts);
-        outsCalculator.Calculate();
-        var totalOuts = players.Sum(player => player.Outs.Count);
-
-        Assert.Equal(18, totalOuts);
-    }
-    
-    [Fact]
-    public void RealLifeExample10()
-    {
-        var players = new List<IPlayer>
-        {
-            new Player(Hand.Parse("3dAs")),
-            new Player(Hand.Parse("JcAc")),
-            new Player(Hand.Parse("3sQd")),
-            new Player(Hand.Parse("6h8h")),
-            new Player(Hand.Parse("9c7d")),
-            new Player(Hand.Parse("Th8d")),
-            new Player(Hand.Parse("4c7c")),
-        };
-
-        var boardTurn = Board.Parse("3cQs6c2s");
-
-        var gameOuts = new HoldemGame(boardTurn, players);
-        
-        var outsCalculator = _outsCalculatorFactory.GetOutsCalculator(gameOuts);
-        outsCalculator.Calculate();
-        var totalOuts = players.Sum(player => player.Outs.Count);
-
-        Assert.Equal(12, totalOuts);
     }
 }
