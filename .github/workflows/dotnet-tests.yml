@@ -41,7 +41,7 @@ jobs:
 
     - name: Run unit tests with coverage
       run: |
-        dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info
+        dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../coverage/lcov.info
       
     - name: Set Coverage Threshold as Environment Variable
       run: echo "COVERAGE_THRESHOLD=${{ secrets.COVERAGE_THRESHOLD }}" >> $GITHUB_ENV
