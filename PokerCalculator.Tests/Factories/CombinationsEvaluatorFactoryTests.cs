@@ -39,21 +39,21 @@ public class CombinationsEvaluatorFactoryTests
         Assert.IsType<HoldemCombinationsEvaluator>(evaluator);
     }
 
-    // [Fact]
-    // public void CombinationsEvaluatorFactory_GetCombinationsEvaluator_ThrowsExceptionOnUnsupportedType()
-    // {
-    //     ICombinationsEvaluatorFactory factory = new CombinationsEvaluatorFactory();
-    //
-    //     Assert.Throws<NotSupportedException>(() => factory.GetCombinationsEvaluator((PokerGameType)90));
-    // }
-    //
-    // [Fact]
-    // public void CombinationsEvaluatorFactory_GetCombinationsEvaluator_ThrowsExceptionOnUnsupportedGame()
-    // {
-    //     ICombinationsEvaluatorFactory factory = new CombinationsEvaluatorFactory();
-    //
-    //     var game = new Mock<IGame>();
-    //
-    //     Assert.Throws<NotSupportedException>(() => factory.GetCombinationsEvaluator(game.Object));
-    // }
+    [Fact]
+    public void CombinationsEvaluatorFactory_GetCombinationsEvaluator_ThrowsExceptionOnUnsupportedType()
+    {
+        ICombinationsEvaluatorFactory factory = new CombinationsEvaluatorFactory();
+    
+        Assert.Throws<NotSupportedException>(() => factory.GetCombinationsEvaluator((PokerGameType)90));
+    }
+    
+    [Fact]
+    public void CombinationsEvaluatorFactory_GetCombinationsEvaluator_ThrowsExceptionOnUnsupportedGame()
+    {
+        ICombinationsEvaluatorFactory factory = new CombinationsEvaluatorFactory();
+    
+        var game = new Mock<IGame>();
+    
+        Assert.Throws<NotSupportedException>(() => factory.GetCombinationsEvaluator(game.Object));
+    }
 }
