@@ -1,8 +1,8 @@
 ﻿using System;
 using PokerCalculator.Enums;
 using PokerCalculator.Interfaces;
+using PokerCalculator.Models;
 using PokerCalculator.Services;
-
 
 namespace PokerCalculator.Factories;
 
@@ -14,6 +14,15 @@ public class CombinationsEvaluatorFactory : ICombinationsEvaluatorFactory
         {
             PokerGameType.TexasHoldem => new HoldemCombinationsEvaluator(),
             _ => throw new NotSupportedException($"Unsupported game type: {gameType}")
+        };
+    }
+    
+    public ICombinationsEvaluator GetCombinationsEvaluator(IGame game)
+    {
+        return game switch
+        {
+            HoldemGame => new HoldemCombinationsEvaluator(),
+            _ => throw new NotSupportedException($"Unsupported game type: {game.GetType()}")
         };
     }
 }
