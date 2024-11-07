@@ -48,7 +48,8 @@ jobs:
         COVERAGE_PERCENTAGE=$(grep -oP 'SF:.*\nDA:\d+,\d+' ./coverage/lcov.info | awk -F',' '{s+=$2} END {print s/NR}')
         echo "Coverage Percentage: $COVERAGE_PERCENTAGE"
         THRESHOLD=90
-        if (( $(echo "$COVERAGE_PERCENTAGE < ${{ secrets.COVERAGE_THRESHOLD }}" | bc -l) )); then
+        if (( $(echo "$COVERAGE_PERCENTAGE < ${{ secrets.COVERAGE_THRESHOLD }}" | bc -l) ))
+        then
           echo "Coverage percentage is below threshold (${{ secrets.COVERAGE_THRESHOLD }}%)."
           exit 1
         fi
