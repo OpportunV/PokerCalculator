@@ -43,13 +43,10 @@ jobs:
       run: |
         dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info
       
-    - name: Check coverage percentage
+    - name: Set Coverage Threshold as Environment Variable
+      run: echo "COVERAGE_THRESHOLD=${{ secrets.COVERAGE_THRESHOLD }}" >> $GITHUB_ENV
+
+    - name: Check Coverage
+      shell: pwsh
       run: |
-        COVERAGE_PERCENTAGE=$(grep -oP 'SF:.*\nDA:\d+,\d+' ./coverage/lcov.info | awk -F',' '{s+=$2} END {print s/NR}')
-        echo "Coverage Percentage: $COVERAGE_PERCENTAGE"
-        THRESHOLD=90
-        if (( $(echo "$COVERAGE_PERCENTAGE < ${{ secrets.COVERAGE_THRESHOLD }}" | bc -l) ))
-        then
-          echo "Coverage percentage is below threshold (${{ secrets.COVERAGE_THRESHOLD }}%)."
-          exit 1
-        fi
+        ..\scripts\check-coverage.ps1
