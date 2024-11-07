@@ -1,10 +1,26 @@
-﻿$coveragePercentage = Select-String -Path './coverage/lcov.info' -Pattern '"lineCoverage":\K[0-9.]*' | ForEach-Object { $_.Matches.Groups[0].Value }
+﻿$lf = 0
+$lh = 0
 
-Write-Host "Coverage Percentage: $coveragePercentage"
+Select-String -Path './coverage/lcov.info' -Pattern '^LF:(\d+)' | ForEach-Object {
+    $lf += [int]$_.Matches.Groups[1].Value
+}
+
+Select-String -Path './coverage/lcov.info' -Pattern '^LH:(\d+)' | ForEach-Object {
+    $lh += [int]$_.Matches.Groups[1].Value
+}
+
+if ($lf -eq 0) {
+    Write-Host "No lines found in the coverage data. Coverage cannot be calculated."
+    exit 1
+}
+
+$coveragePercentage = ($lh / $lf) * 100
+
+Write-Host "Coverage Percentage: $coveragePercentage%"
 
 $coverageThreshold = $env:COVERAGE_THRESHOLD
 
-if ([double]$coveragePercentage -lt [double]$coverageThreshold) {
+if ($coveragePercentage -lt [double]$coverageThreshold) {
     Write-Host "Coverage percentage is below threshold ($coverageThreshold%)."
     exit 1
 } else {
