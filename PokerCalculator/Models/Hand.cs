@@ -50,4 +50,10 @@ public class Hand : IHand
 
         return hand;
     }
+
+    public override string ToString()
+    {
+        var cards = string.Join("", _cards);
+        return $"[{cards}]";
+    }
 }
