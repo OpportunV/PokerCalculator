@@ -19,6 +19,7 @@ $coveragePercentage = ($lh / $lf) * 100
 Write-Host "Coverage Percentage: $coveragePercentage%"
 
 $coverageThreshold = $env:COVERAGE_THRESHOLD
+Write-Host "Coverage Threshold: $coverageThreshold%"
 
 if ($coveragePercentage -lt [double]$coverageThreshold) {
     Write-Host "Coverage percentage is below threshold ($coverageThreshold%)."
