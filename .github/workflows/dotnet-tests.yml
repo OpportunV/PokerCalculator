@@ -30,11 +30,6 @@ jobs:
     - name: Test
       run: |
         dotnet test -c Release --collect:"XPlat Code Coverage" --logger "junit;LogFilePath=../reports/test-results.xml"
-
-    - name: Generate coverage report
-      run: |
-        dotnet tool install --global dotnet-reportgenerator-globaltool
-        reportgenerator -reports:coverage.cobertura.xml -targetdir:coverage-report
     
     - name: Test Report
       uses: dorny/test-reporter@v1
